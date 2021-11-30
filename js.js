@@ -6,7 +6,7 @@ var AWS = require('aws-sdk');
 
 var bucketName = 'sangnc1-aws-test';
 var bucketRegion = 'us-west-2';
-var IdentityPoolId = IDENTITY_POOL_ID;
+var IdentityPoolId = arn:aws:iam::944514424264:role/Ec2AccessToS3;
 
 AWS.config.update({
                 region: bucketRegion,
