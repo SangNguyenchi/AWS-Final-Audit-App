@@ -12,5 +12,5 @@ const uploadFileToS3 = (e) => {
    
 window.onload = function () {
   $("upload").onchange = uploadFile;
-  //$("uploadS3").onchange = uploadFileToS3;
+  $("uploadS3").onchange = uploadFileToS3;
 };
