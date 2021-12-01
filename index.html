@@ -13,9 +13,34 @@
       crossorigin="anonymous"
     />
     <script src="./js.js"></script>
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.357.0.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript"></script>
+    <script>
+      const form = document.querySelector('form');
+      const file = document.querySelector('input[name="file"]');
+
+      form.addEventListener('submit', async (e) => {
+       e.preventDefault();
+
+      const { url, fields } = await fetch("http://52.88.127.212:8080/get-signed-url").then(response => response.json())
+
+
+      const data = {
+        bucket: "sangnc1-aws-test",
+        ...fields,
+        'Content-Type': file.files[0].type,
+        file: file.files[0],
+      };
+
+      const formData = new FormData();
+      for (const name in data) {
+        formData.append(name, data[name]);
+      }
+
+      const response = await fetch(url, {
+        method: 'POST',
+        body: formData,
+      });
+    });
+  </script>
   </head>
   <body>
     <div class="main">
@@ -29,7 +54,7 @@
             <input type="file" name="file" id="upload" />
           </div>
         </div>
-        <div class="file btn btn-sm btn-primary mt-3" id="uploadS3">
+        <div type="submit" class="file btn btn-sm btn-primary mt-3" id="uploadS3">
           Upload to S3
           <input type="file" name="file" />
         </div>
